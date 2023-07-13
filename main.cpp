@@ -45,6 +45,8 @@ int main(int argc, char **argv)
     return 0;
 }
 
+
+//prints welcome message
 void welcome()
 {
     cout << endl
@@ -53,25 +55,34 @@ void welcome()
          << "Valid scores are between 0 and 4 inclusive.\n";
 }
 
+//read in score values as double and stores them in an array
+//increments count as a pointer to the array
 void readScores(double scores[], int &count){
     double score;
     count = 0;
     
+    //loop until user enters -1
     while (score != -1){
         readDouble(">> ", score);
         if (score < -1 || score > 4){
+            //display error is score is < -1 or > 4
             cout << "You have chosen poorly. Resubmit grade.\n";
         } else if(cin.fail()){
+            //if user enters anything that isn't a number
+            //clear and ignore input
             cin.clear();
             cin.ignore();
             cout << "You have chosen poorly. Resubmit grade.\n";
         } else if (score == -1){
             //do nothing
         } else {
+            //while count is between 0 and AN_ABSURD_NUMBER
+            //add number to the array and increment count
             if( count >= 0 && count < AN_ABSURD_NUMBER){
                 scores[count] = score;
                 count++;
             } else {
+                //error out of bounds
                 cout << "Array bounds exceeded.\n";
                 break;
             }
@@ -80,19 +91,25 @@ void readScores(double scores[], int &count){
 }
 
 void readDouble(char prompt[], double &num){
-    bool loopState;
     int i;
+    //finds the length of the array by finding the memory size of the array and 
+    //dividing by the memory of a single unit of the array
     int length = sizeof(prompt) / sizeof(prompt[0]);
 
+    //print cstring
     for ( i  = 0; i < length; i++){
         cout << prompt[i];
     }
+    //input grade
     cin >> num;
 }
 
 void calcGrades(double scores[], char grade[], int count){
     int i;
 
+    //basic grading rubric, read the data in the score array
+    //and then save the letter grade in the corrisponding location
+    //in the grade array
     for (i = 0; i < count; i++){
         if(scores[i] > 3.3 && scores[i] <= 4.0){
             grade[i] = 'A';
@@ -111,6 +128,8 @@ void calcGrades(double scores[], char grade[], int count){
 void printList(double scores[], char grades[], int count){
     int i;
 
+    //print scores and grades arrays in parallel
+    //set precision to 1 floating point.
     for (i = 0; i < count; i++){
         cout << fixed << setprecision(1) << scores[i] << " " << grades[i] << endl;
     }
@@ -119,17 +138,25 @@ void printList(double scores[], char grades[], int count){
 void sort(double scores[], char grades[], int count){
     int i, j;
 
+    //sorts array from least to greatest
     for (i = 0; i < count - 1; i++){
         for (j = 0; j < count - i - 1; j++){
+            //if score[j] is less than score[j+1]
             if (scores[j] > scores[j + 1]){
+                //set tempScore = to scores[j] and tempGrade = grades[j]
                 double tempScore = scores[j];
                 char tempGrade = grades[j];
+                //set scores[j] = scores[j+1]
+                //set grades[j] = grades[j+1]
                 scores[j] = scores[j + 1];
                 grades[j] = grades[j + 1];
+                //set scores[j+1] = tempScore
+                //set grades[j+1] = tempGrade
                 scores[j + 1] = tempScore;
                 grades[j + 1] = tempGrade;
             }
         }
+        //repeat until sorted
     }
 }
 
@@ -137,9 +164,11 @@ double median(double scores[], int count){
     double totScore = 0;
     int i;
 
+    //find total sum of scores
     for (i = 0; i < count; i++){
         totScore += scores[i];
     }
 
+    //return the median average
     return totScore / count;
 }
