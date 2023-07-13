@@ -52,7 +52,7 @@ void welcome()
 }
 
 void readScores(double scores[], int &count){
-    double score = 0;
+    double score;
     count = 0;
     
     while (score != -1){
@@ -114,4 +114,19 @@ void printList(double scores[], char grades[], int count){
     }
 }
 
+void sort(double scores[], char grades[], int count){
+    int i, j;
 
+    for (i = 0; i < count - 1; i++){
+        for (j = 0; j < count - i - 1; j++){
+            if (scores[j] > scores[j + 1]){
+                double tempScore = scores[j];
+                char tempGrade = grades[j];
+                scores[j] = scores[j + 1];
+                grades[j] = grades[j + 1];
+                scores[j + 1] = tempScore;
+                grades[j + 1] = tempGrade;
+            }
+        }
+    }
+}
