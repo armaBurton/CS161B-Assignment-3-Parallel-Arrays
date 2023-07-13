@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int AN_ABSURD_NUMBER = 999999;
+const int AN_ABSURD_NUMBER = 9999;
 
 void welcome();
 // void readScores(double scores[], int &count);
@@ -20,8 +20,10 @@ int main(int argc, char **argv)
     double scores[AN_ABSURD_NUMBER];
     char grades[AN_ABSURD_NUMBER];
     int count;
-    cout << "TEST" << endl;
+
     welcome();
+
+    system("pause");
 
     return 0;
 }
