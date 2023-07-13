@@ -23,6 +23,8 @@ int main(int argc, char **argv)
     cout << "TEST" << endl;
     welcome();
 
+    system("pause");
+
     return 0;
 }
 
