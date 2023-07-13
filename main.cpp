@@ -15,7 +15,7 @@ void readDouble(char prompt[], double &num);
 void calcGrades(double scores[], char grade[], int count);
 void printList(double scores[], char grades[], int count);
 void sort(double scores[], char grades[], int count);
-// double median(double scores[], int count);
+double median(double scores[], int count);
 
 int main(int argc, char **argv)
 {
@@ -37,6 +37,8 @@ int main(int argc, char **argv)
          << "The list sorted by scores in ascending order:\n";
     sort(scores, grades, count);
     printList(scores, grades, count);
+    cout << endl
+         << "The median score is: " << median(scores, count) << endl;
 
 
     system("pause");
@@ -129,4 +131,15 @@ void sort(double scores[], char grades[], int count){
             }
         }
     }
+}
+
+double median(double scores[], int count){
+    double totScore = 0;
+    int i;
+
+    for (i = 0; i < count; i++){
+        totScore += scores[i];
+    }
+
+    return totScore / count;
 }
